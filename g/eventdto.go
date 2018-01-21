@@ -2,9 +2,10 @@ package g
 
 import (
 	"fmt"
+	"sync"
+
 	"github.com/open-falcon/common/model"
 	"github.com/open-falcon/common/utils"
-	"sync"
 )
 
 type EventDto struct {
@@ -113,12 +114,12 @@ func (this *SafeEvents) Put(event *model.Event) {
 func Link(event *model.Event) string {
 	tplId := event.TplId()
 	if tplId != 0 {
-		return fmt.Sprintf("%s/template/view/%d", Config().Api.Portal, tplId)
+		return fmt.Sprintf("%s/template/view/%d", "http://falcon-portal.smbrave.cn", tplId)
 	}
 
 	eid := event.ExpressionId()
 	if eid != 0 {
-		return fmt.Sprintf("%s/expression/view/%d", Config().Api.Portal, eid)
+		return fmt.Sprintf("%s/expression/view/%d", "http://falcon-portal.smbrave.cn/", eid)
 	}
 
 	return ""

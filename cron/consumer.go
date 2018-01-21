@@ -2,11 +2,13 @@ package cron
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
+
 	"github.com/open-falcon/alarm/api"
 	"github.com/open-falcon/alarm/g"
 	"github.com/open-falcon/alarm/redis"
 	"github.com/open-falcon/common/model"
-	"log"
 )
 
 func consume(event *model.Event, isHigh bool) {
@@ -101,7 +103,8 @@ func ParseUserMail(event *model.Event, action *api.Action) {
 	userMap := api.GetUsers(action.Uic)
 
 	metric := event.Metric()
-	subject := GenerateSmsContent(event)
+	//subject := GenerateSmsContent(event)
+	subject := fmt.Sprintf("系统告警[%s]", event.Status)
 	content := GenerateMailContent(event)
 	status := event.Status
 	priority := event.Priority()
