@@ -11,7 +11,7 @@ import (
 )
 
 func BuildCommonSMSContent(event *model.Event) string {
-	link := g.Link(event)
+	//link := g.Link(event)
 	var status string
 	if strings.ToUpper(event.Status) == "OK" {
 		status = "恢复"
@@ -27,8 +27,8 @@ func BuildCommonSMSContent(event *model.Event) string {
 			"监控函数：%s %s%s%s\n"+
 			"监控备注：%s\n"+
 			"告警次数：%d/%d\n"+
-			"告警时间：%s\n"+
-			"告警链接：%s\n",
+			"告警时间：%s\n",
+			//"告警链接：%s\n",
 		status,
 		event.Priority(),
 		event.Endpoint,
@@ -42,7 +42,7 @@ func BuildCommonSMSContent(event *model.Event) string {
 		event.CurrentStep,
 		event.MaxStep(),
 		event.FormattedTime(),
-		link,
+		//link,
 	)
 }
 
